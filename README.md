@@ -12,6 +12,5 @@ pip install -r .\requirements.txt
 ```
 4. Start project
 ```bash
-cd contacts
-python manage.py runserver
+python -m flask --app board run --port 8000 --debug
 ```
