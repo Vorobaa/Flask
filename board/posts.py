@@ -3,7 +3,8 @@ from flask import (
     render_template,
     request,
     redirect,
-    url_for
+    url_for,
+    current_app
 )
 
 from board.database import get_db
@@ -23,15 +24,18 @@ def create():
                 (author, message)
             )
             db.commit()
-            return redirect(url_for("posts.posts"))
+            current_app.logger.info(f"New post by {author}")
+            return redirect(url_for("posts.posts", notification='success'))
 
     return render_template("posts/create.html")
 
 @bp.route("/posts")
 def posts():
     db = get_db()
+    notification = request.args.get('notification')
+    print(notification)
     posts = db.execute(
         "SELECT author, message, created FROM post ORDER BY created DESC"
     ).fetchall()
     # posts = []
-    return render_template("posts/posts.html", posts=posts)
+    return render_template("posts/posts.html", posts=posts, notification=notification)

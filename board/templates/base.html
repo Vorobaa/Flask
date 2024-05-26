@@ -7,6 +7,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Message Board - {% block title %}{% endblock title %}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/saturn_planet_icon_263078.ico') }}" type="image/x-icon">
 </head>
 <body>
     <h1>Message Board</h1>
@@ -19,5 +20,16 @@
             {% block content %}<p>No message</p>{% endblock content %}
         </main>
     </section>
+    {% if error %}
+    <div class="error">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    {% if notification %}
+    <div class="notifications">
+        {{ notification }}
+    </div>
+    {% endif %}
 </body>
 </html>
