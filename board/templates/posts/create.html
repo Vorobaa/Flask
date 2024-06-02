@@ -16,6 +16,16 @@
         </div>
         <div class="from-group">
             <input type="submit" value="Post Message" class="submit-btn">
+            <input type="checkbox" id="AI" value="off">
+            <label for="AI">AI</label>
         </div>
     </form>
+<script>
+    document.getElementByID("AI").addEventListener('change', function() {
+        if (this.checked) {
+<!--            value = AI-->
+            alert("AI");
+        }
+    })
+</script>
 {% endblock content %}

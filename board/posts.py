@@ -6,6 +6,7 @@ from flask import (
     url_for,
     current_app
 )
+from example_use_openai import AI
 
 from board.database import get_db
 
@@ -14,8 +15,12 @@ bp = Blueprint("posts", __name__)
 @bp.route("/create", methods=("GET", "POST"))
 def create():
     if request.method == "POST":
-        author = request.form["author"] or "NoName"
-        message = request.form["message"]
+        if request.form["author"].lower() == "ai":
+            author = "AI"
+            message = AI(request.form["message"])
+        else:
+            author = request.form["author"] or "NoName"
+            message = (request.form["message"])
 
         if message:
             db = get_db()
